@@ -6,9 +6,25 @@ void dump(struct slist* list) {
     int i;
 
     i = 0;
-    for (lp = list; lp != NULL; lp = lp->next) {
+    for (lp = list->next; lp != NULL; lp = lp->next) {
         printf("[%d] %d\n", i++, lp->value);
     }
+}
+
+// create new head node
+struct slist *create_head() {
+    struct slist *head;
+    head = (struct slist *)calloc(1, sizeof(struct slist));
+
+    if (head == NULL) {
+        perror("failed to allocate memory.\n");
+        exit(0);
+    }
+
+    head->value = 0;
+    head->next = NULL;
+
+    return head;
 }
 
 // create new node
@@ -132,18 +148,19 @@ int main(int argc, char const* argv[])
     struct slist *list;
     int target;
 
-    list = create(1);
+    list = create_head();
 
+    append(list, 1);
     append(list, 2);
     append(list, 3);
-    append(list, 4);
-    append(list, 5);
 
+    /*
     insert(list, 999, 1);
     modify(list, 334, 4);
     list = top(list, 333);
 
     delete(list, 6);
+    */
     dump(list);
 
     // search index;

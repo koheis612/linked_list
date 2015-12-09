@@ -6,6 +6,8 @@ struct slist {
     struct slist *next;
 };
 
+
+struct slist *create_head(void);
 struct slist *create(int);
 struct slist *top(struct slist *, int);
 
