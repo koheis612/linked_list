@@ -9,7 +9,6 @@ struct slist {
 
 struct slist *create_head(void);
 struct slist *create(int);
-struct slist *top(struct slist *, int);
 
 int search(struct slist *, int);
 

@@ -44,15 +44,6 @@ struct slist *create(int value) {
     return node;
 }
 
-struct slist *top(struct slist* list, int value) {
-    struct slist *newnode;
-    
-    newnode = create(value);
-    newnode->next = list;
-
-    return newnode;
-}
-
 // add a node to the end of list
 void append(struct slist* list, int value) {
     struct slist *node;
@@ -78,9 +69,10 @@ void insert(struct slist* list, int value, int index) {
 
     now = create(value);
     prev = list;
-    for (i = 0; i < index - 1; i++) {
+    for (i = 0; i < index; i++) {
         if (prev->next == NULL) {
-            break;
+            append(list, value);
+            return;
         }
         prev = prev->next;
     }
@@ -97,7 +89,7 @@ void delete(struct slist *list, int index) {
     int i;
 
     prev = list;
-    for (i = 0; i < index - 1; i++) {
+    for (i = 0; i < index; i++) {
         if(prev->next == NULL) {
             break;
         }
@@ -118,7 +110,7 @@ void modify(struct slist* list, int value, int index) {
     int i;
 
     tmp = list;
-    for (i = 0; i < index - 1; i++) {
+    for (i = 0; i < index; i++) {
         if (tmp->next == NULL) {
             break;
         }
@@ -135,7 +127,7 @@ int search(struct slist *list, int target) {
     index = 0;
     for (tmp = list; tmp != NULL; tmp = tmp->next) {
         if (tmp->value == target) {
-            return index;
+            return index - 1;
         }
         index++;
     }
@@ -154,13 +146,9 @@ int main(int argc, char const* argv[])
     append(list, 2);
     append(list, 3);
 
-    /*
-    insert(list, 999, 1);
-    modify(list, 334, 4);
-    list = top(list, 333);
+    // insert(list, 999, 1);
+    // delete(list, 0);
 
-    delete(list, 6);
-    */
     dump(list);
 
     // search index;
