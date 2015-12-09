@@ -1,6 +1,5 @@
 #include "slist.h"
 
-// show list
 void dump(struct slist* list) {
     struct slist *lp;
     int i;
@@ -11,7 +10,6 @@ void dump(struct slist* list) {
     }
 }
 
-// create new head node
 struct slist *create_head() {
     struct slist *head;
     head = (struct slist *)calloc(1, sizeof(struct slist));
@@ -27,7 +25,6 @@ struct slist *create_head() {
     return head;
 }
 
-// create new node
 struct slist *create(int value) {
     struct slist *node;
 
@@ -44,7 +41,6 @@ struct slist *create(int value) {
     return node;
 }
 
-// add a node to the end of list
 void append(struct slist* list, int value) {
     struct slist *node;
     struct slist *tail;
@@ -59,7 +55,6 @@ void append(struct slist* list, int value) {
     tail->next = node;
 }
 
-// insert node
 void insert(struct slist* list, int value, int index) {
     struct slist *prev;
     struct slist *next;
@@ -82,16 +77,17 @@ void insert(struct slist* list, int value, int index) {
     prev->next = now;
 }
 
-// delete node
-void delete(struct slist *list, int index) {
+void clear(struct slist *list, int index) {
     struct slist *prev;
     struct slist *next;
+    struct slist *tmp;
     int i;
 
     prev = list;
+
     for (i = 0; i < index; i++) {
         if(prev->next == NULL) {
-            perror("failed to delete node.\n");
+            perror("failed to clear node.\n");
             exit(EXIT_FAILURE);
         }
         prev = prev->next;
@@ -99,13 +95,16 @@ void delete(struct slist *list, int index) {
 
     next = prev->next->next;
     if (next != NULL) {
+        tmp = prev->next;
         prev->next = next;
     } else {
+        tmp = prev->next;
         prev->next = NULL;
     }
+
+    free(tmp);
 }
 
-// modify value of node
 void modify(struct slist* list, int value, int index) {
     struct slist *tmp;
     int i;
@@ -135,4 +134,32 @@ int search(struct slist *list, int target) {
     }
     perror("failed to search target from list.\n");
     exit(EXIT_FAILURE);
+}
+
+void swap_values(struct slist *p1, struct slist *p2) {
+    int tmp;
+    tmp = p1->value;
+    p1->value = p2->value;
+    p2->value = tmp;
+}
+
+void sort_list(struct slist *list) {
+    struct slist *start;
+    struct slist *tmp;
+    struct slist *min;
+
+    start = list->next;
+
+    while(start->next) {
+        min = start;
+        tmp = start->next;
+        while (tmp) {
+            if (min->value > tmp->value) {
+                min = tmp;
+            }
+            tmp = tmp->next;
+        }
+        swap_values(start, min);
+        start = start->next;
+    }
 }

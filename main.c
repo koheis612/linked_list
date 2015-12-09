@@ -12,12 +12,19 @@ int main(int argc, char const* argv[])
     append(list, 3);
 
     insert(list, 999, 1);
-    // delete(list, 0);
+    clear(list, 0);
 
     dump(list);
 
+    /*
+     * sort_list is implemented by swapping values.
+    sort_list(list);
+    dump(list);
+    */
+
     // search index;
     target = 999;
-    printf("---\ntarget:%d index:%d\n", target, search(list, target));
+    puts("---");
+    printf("target:%d index:%d\n", target, search(list, target));
     return 0;
 }

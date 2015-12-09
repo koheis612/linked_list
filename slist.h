@@ -18,7 +18,9 @@ int search(struct slist *, int);
 void dump(struct slist *);
 void append(struct slist *, int);
 void insert(struct slist *, int, int);
-void delete(struct slist *, int);
+void clear(struct slist *, int);
 void modify(struct slist *, int, int);
+void swap_values(struct slist *, struct slist *);
+void sort_list(struct slist *);
 
 #endif
