@@ -18,7 +18,7 @@ struct slist *create_head() {
 
     if (head == NULL) {
         perror("failed to allocate memory.\n");
-        EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
 
     head->value = 0;
@@ -35,7 +35,7 @@ struct slist *create(int value) {
 
     if (node == NULL) {
         perror("failed to allocate memory.\n");
-        EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
 
     node->value = value;
@@ -92,7 +92,7 @@ void delete(struct slist *list, int index) {
     for (i = 0; i < index; i++) {
         if(prev->next == NULL) {
             perror("failed to delete node.\n");
-            EXIT_FAILURE;
+            exit(EXIT_FAILURE);
         }
         prev = prev->next;
     }
@@ -114,7 +114,7 @@ void modify(struct slist* list, int value, int index) {
     for (i = 0; i < index; i++) {
         if (tmp->next == NULL) {
             perror("failed to modify node.\n");
-            EXIT_FAILURE;
+            exit(EXIT_FAILURE);
         }
         tmp = tmp->next;
     }
@@ -133,6 +133,6 @@ int search(struct slist *list, int target) {
         }
         index++;
     }
-    perror("failed to search target from list.");
-    EXIT_FAILURE;
+    perror("failed to search target from list.\n");
+    exit(EXIT_FAILURE);
 }
