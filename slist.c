@@ -18,7 +18,7 @@ struct slist *create_head() {
 
     if (head == NULL) {
         perror("failed to allocate memory.\n");
-        exit(0);
+        EXIT_FAILURE;
     }
 
     head->value = 0;
@@ -35,7 +35,7 @@ struct slist *create(int value) {
 
     if (node == NULL) {
         perror("failed to allocate memory.\n");
-        exit(0);
+        EXIT_FAILURE;
     }
 
     node->value = value;
@@ -91,7 +91,8 @@ void delete(struct slist *list, int index) {
     prev = list;
     for (i = 0; i < index; i++) {
         if(prev->next == NULL) {
-            break;
+            perror("failed to delete node.\n");
+            EXIT_FAILURE;
         }
         prev = prev->next;
     }
@@ -112,7 +113,8 @@ void modify(struct slist* list, int value, int index) {
     tmp = list;
     for (i = 0; i < index; i++) {
         if (tmp->next == NULL) {
-            break;
+            perror("failed to modify node.\n");
+            EXIT_FAILURE;
         }
         tmp = tmp->next;
     }
@@ -125,34 +127,12 @@ int search(struct slist *list, int target) {
     int index;
 
     index = 0;
-    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+    for (tmp = list->next; tmp != NULL; tmp = tmp->next) {
         if (tmp->value == target) {
             return index - 1;
         }
         index++;
     }
-    return -1;
-}
-
-// main
-int main(int argc, char const* argv[])
-{
-    struct slist *list;
-    int target;
-
-    list = create_head();
-
-    append(list, 1);
-    append(list, 2);
-    append(list, 3);
-
-    // insert(list, 999, 1);
-    // delete(list, 0);
-
-    dump(list);
-
-    // search index;
-    target = 999;
-    printf("---\ntarget:%d index:%d\n", target, search(list, target));
-    return 0;
+    perror("failed to search target from list.");
+    EXIT_FAILURE;
 }

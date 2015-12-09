@@ -1,2 +1,2 @@
-slist: slist.c
-	gcc -Wall slist.c -o slist
+slist: slist.c main.c
+	gcc -Wall slist.c main.c -o slist
