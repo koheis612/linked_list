@@ -17,7 +17,7 @@ int main(int argc, char const* argv[])
     dump(list);
 
     // search index;
-    target = 0;
+    target = 999;
     printf("---\ntarget:%d index:%d\n", target, search(list, target));
     return 0;
 }

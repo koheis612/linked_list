@@ -129,7 +129,7 @@ int search(struct slist *list, int target) {
     index = 0;
     for (tmp = list->next; tmp != NULL; tmp = tmp->next) {
         if (tmp->value == target) {
-            return index - 1;
+            return index;
         }
         index++;
     }
