@@ -41,6 +41,29 @@ struct slist *create(int value) {
     return node;
 }
 
+struct slist *b_sort(struct slist *list) {
+    struct slist *head;
+    struct slist *tmp;
+
+    head = list;
+
+    while (list != NULL && list->next != NULL) {
+        if (head->value > head->next->value) {
+            tmp = list->next;
+            list->next = tmp->next;
+            tmp->next = head;
+            head = tmp;
+        }
+        list = list->next;
+    }
+
+    if (head->next != NULL) {
+        head->next = b_sort(head->next);
+    }
+
+    return head;
+}
+
 void append(struct slist* list, int value) {
     struct slist *node;
     struct slist *tail;

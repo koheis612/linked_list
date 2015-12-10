@@ -3,6 +3,7 @@
 int main(int argc, char const* argv[])
 {
     struct slist *list;
+    struct slist *sorted;
     int target;
 
     list = create_head();
@@ -16,15 +17,13 @@ int main(int argc, char const* argv[])
 
     dump(list);
 
-    /*
-     * sort_list is implemented by swapping values.
-    sort_list(list);
-    dump(list);
-    */
-
     // search index;
     target = 999;
     puts("---");
     printf("target:%d index:%d\n", target, search(list, target));
+
+    // sorting
+    sorted = b_sort(list);
+    dump(sorted);
     return 0;
 }

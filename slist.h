@@ -12,6 +12,7 @@ struct slist {
 
 struct slist *create_head(void);
 struct slist *create(int);
+struct slist *b_sort(struct slist *list);
 
 int search(struct slist *, int);
 
